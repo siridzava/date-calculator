@@ -219,9 +219,11 @@ function loadDateFromLS() {
         localStorage.setItem('results', JSON.stringify(results));
     } else {
         results = JSON.parse(localStorage.getItem('results'));
-        displayeResultsHeader();
         results.forEach((res) => {
             addResult(res, 'end');
         });
+    }
+    if (results.length !== 0) {
+        displayeResultsHeader();
     }
 }
