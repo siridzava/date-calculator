@@ -9,8 +9,19 @@ const calculateButton = document.querySelector('#calculate');
 const days = document.querySelector('#days');
 const duration = document.querySelector('#duration');
 const resultsList = document.querySelector('.results-list');
+const errorMessage = document.querySelector('.error-message');
 const regex = /[0-9.]/;
 const sep = '.';
+
+const messages = {
+    invalidDates: `Invalid dates`,
+    secondDate: `Second date should be after first`,
+};
+
+const validationLimits = {
+    min: 8,
+    max: 10,
+};
 
 const datesState = {
     firstDate: null,
@@ -55,7 +66,7 @@ function enterCharactersToDateInputs(e) {
     const key = e.key;
     if (
         !regex.test(key) ||
-        (e.target.value.length >= 10 &&
+        (e.target.value.length >= validationLimits.max &&
             e.target.selectionEnd - e.target.selectionStart === 0)
     ) {
         e.preventDefault();
@@ -63,7 +74,7 @@ function enterCharactersToDateInputs(e) {
 }
 
 function handleInput(e) {
-    if (e.target.value.length < 8) {
+    if (e.target.value.length < validationLimits.min) {
         return;
     }
     validateInput(e.target);
@@ -86,6 +97,7 @@ function validateInput(input) {
         node.style.borderColor = '#275459';
         updateDatesState(node.dataset.input, true, node.value);
         setSecondInputState(datesState.firstDateValid);
+        errorMessage.style.display = 'none';
     }
 }
 
@@ -132,16 +144,21 @@ function updateDatesState(id, state, value) {
 
 function calculateResults() {
     if (!datesState.datesValid) {
-        console.log('no');
+        displayErrorMessage(messages.invalidDates);
         return;
     }
 
     if (datesState.firstDate > datesState.secondDate) {
-        console.log('Second date should be after first');
+        displayErrorMessage(messages.secondDate);
         return;
     }
 
     getSpecificDaysBetweenDates(datesState.firstDate, datesState.secondDate);
+}
+
+function displayErrorMessage(message) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = 'flex';
 }
 
 function getSpecificDaysBetweenDates(firstDate, secondDate) {
