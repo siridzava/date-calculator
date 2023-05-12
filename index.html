@@ -10,56 +10,58 @@
     </head>
     <body>
         <div class="container">
-            <div class="calendar-app">
-                <div class="calendar-wrapper">
-                    <div class="presets">
-                        <button id="week-preset" data-preset="week">
-                            Week
-                        </button>
-                        <button id="month-preset" data-preset="month">
-                            Month
-                        </button>
-                    </div>
-                    <input
-                        data-input="firstDate"
-                        class="date-input"
-                        name="first-date"
-                        id="first-date"
-                        placeholder="MM.DD.YYYY"
-                    />
+            <div class="calendar-wrapper">
+                <h1>Calendar app</h1>
+                <label for="first-date">Start date</label>
+                <input
+                    data-input="firstDate"
+                    class="date-input"
+                    name="first-date"
+                    id="first-date"
+                    placeholder="MM.DD.YYYY"
+                />
+                <div class="presets">
+                    <button id="week-preset" data-preset="week">
+                        Add 1 Week
+                    </button>
+                    <button id="month-preset" data-preset="month">
+                        Add 1 Month
+                    </button>
+                </div>
 
-                    <input
-                        data-input="secondDate"
-                        class="date-input"
-                        name="second-date"
-                        id="second-date"
-                        placeholder="MM.DD.YYYY"
-                        disabled
-                    />
+                <label for="second-date">End date</label>
+                <input
+                    data-input="secondDate"
+                    class="date-input"
+                    name="second-date"
+                    id="second-date"
+                    placeholder="MM.DD.YYYY"
+                    disabled
+                />
 
-                    <form>
-                        <label for="days">Day types:</label>
-                        <select name="days" id="days">
-                            <option value="all">All Days</option>
-                            <option value="work">Workdays</option>
-                            <option value="weekends">Weekends</option>
-                        </select>
-                    </form>
+                <form>
+                    <label for="days">Day types:</label>
+                    <select name="days" id="days">
+                        <option value="all">All Days</option>
+                        <option value="work">Workdays</option>
+                        <option value="weekends">Weekends</option>
+                    </select>
+                </form>
 
-                    <form>
-                        <label for="duration">Duration:</label>
-                        <select name="duration" id="duration">
-                            <option value="days">Days</option>
-                            <option value="hours">Hours</option>
-                            <option value="minutes">Minutes</option>
-                            <option value="seconds">Seconds</option>
-                        </select>
-                    </form>
-                    <button id="calculate">Calculate</button>
-                    <div id="results">
-                        <h4>Results:</h4>
-                        <ul class="results-list"></ul>
-                    </div>
+                <form>
+                    <label for="duration">Duration:</label>
+                    <select name="duration" id="duration">
+                        <option value="days">Days</option>
+                        <option value="hours">Hours</option>
+                        <option value="minutes">Minutes</option>
+                        <option value="seconds">Seconds</option>
+                    </select>
+                </form>
+                <button id="calculate">Calculate</button>
+                <div class="error-message">Invalid dates</div>
+                <div id="results">
+                    <h2>Results:</h2>
+                    <ul class="results-list"></ul>
                 </div>
             </div>
         </div>

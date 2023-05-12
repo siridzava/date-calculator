@@ -76,16 +76,14 @@ function validateInput(input) {
         return;
     }
 
-    console.log(node);
-
     if (!isDateValid(node.value)) {
-        node.style.backgroundColor = 'red';
-        node.style.color = 'white';
+        node.style.backgroundColor = '#FFE5E0';
+        node.style.borderColor = '#731510';
         updateDatesState(node.dataset.input, false);
         setSecondInputState(datesState.firstDateValid);
     } else {
-        node.style.backgroundColor = 'green';
-        node.style.color = 'black';
+        node.style.backgroundColor = '#B2D5D9';
+        node.style.borderColor = '#275459';
         updateDatesState(node.dataset.input, true, node.value);
         setSecondInputState(datesState.firstDateValid);
     }
