@@ -161,7 +161,7 @@ function calculateResults() {
 
 function displayErrorMessage(message) {
     errorMessage.textContent = message;
-    errorMessage.style.display = 'flex';
+    errorMessage.style.display = 'block';
 }
 
 function getSpecificDaysBetweenDates(firstDate, secondDate) {
