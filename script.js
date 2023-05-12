@@ -10,6 +10,7 @@ const days = document.querySelector('#days');
 const duration = document.querySelector('#duration');
 const resultsList = document.querySelector('.results-list');
 const errorMessage = document.querySelector('.error-message');
+const resultsHeader = document.querySelector('#results-header');
 const regex = /[0-9.]/;
 const sep = '.';
 
@@ -48,6 +49,8 @@ const dayTypes = {
 };
 
 init();
+
+loadDateFromLS();
 
 function init() {
     calendar.addEventListener('keypress', enterCharactersToDateInputs);
@@ -179,28 +182,46 @@ function getSpecificDaysBetweenDates(firstDate, secondDate) {
         delta * durationModifier[durationValue]
     }`;
     addResult(entry);
-    LSaddEntry(entry);
+    addResultToLocaleStorage(entry);
 }
 
-function addResult(res) {
+function addResult(res, direction = 'start') {
     const newLi = document.createElement('li');
     newLi.textContent = res;
-    resultsList.prepend(newLi);
+
+    if (direction === 'start') {
+        resultsList.prepend(newLi);
+    }
+    if (direction === 'end') {
+        resultsList.append(newLi);
+    }
+    displayeResultsHeader();
 }
 
-function LSaddEntry(entry) {
-    if (!localStorage.getItem('results')) {
-        localStorage.setItem('results', ['jay']);
+function displayeResultsHeader() {
+    if (resultsHeader.style.display !== 'block') {
+        resultsHeader.style.display = 'block';
     }
 }
 
-/* not done: 
- 1. validation between dates
- 2. presets needs refactoring & bugfixing
- 3. local storage
- 4. styles 
- */
+function addResultToLocaleStorage(res) {
+    let results = JSON.parse(localStorage.getItem('results'));
 
-/*
- 1. refactor workday arrays
- */
+    results.unshift(res);
+
+    localStorage.setItem('results', JSON.stringify(results.slice(0, 10)));
+}
+
+function loadDateFromLS() {
+    let results;
+    if (localStorage.getItem('results') === null) {
+        results = [];
+        localStorage.setItem('results', JSON.stringify(results));
+    } else {
+        results = JSON.parse(localStorage.getItem('results'));
+        displayeResultsHeader();
+        results.forEach((res) => {
+            addResult(res, 'end');
+        });
+    }
+}
