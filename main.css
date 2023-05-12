@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-color: blanchedalmond;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-wrapper {
+    width: 300px;
+    height: 400px;
+    background-color: azure;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.date-input {
+    margin-top: 30px;
+    width: 80%;
+}
+
+#presets {
+    margin-top: 50px;
+}
+
+#results {
+    font-size: 0.8rem;
+}
